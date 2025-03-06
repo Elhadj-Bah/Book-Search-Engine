@@ -8,12 +8,22 @@
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm run dev\"",
     "install": "cd server && npm i && cd ../client && npm i",
     "build": "concurrently \"cd server && npm run build\" \"cd client && npm run build\"",
-    "render-build":"npm install && npm run build"
+    "render-build": "npm install && npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "Dependencies": {
+    "concurrently": "^8.2.0",
+    "dotenv": "^16.4.5",
+    "@apollo/server": "^4.10.4",
+    "express": "^4.19.2",
+    "graphql": "^16.9.0",
+    "mongoose": "^8.4.3"
+  },
   "devDependencies": {
-    "concurrently": "^8.2.0"
+    "@types/express": "^4.17.21",
+    "typescript": "^5.4.5",
+    "nodemon": "^3.1.0"
   }
 }
