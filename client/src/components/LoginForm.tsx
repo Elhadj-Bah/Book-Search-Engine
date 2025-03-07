@@ -4,10 +4,10 @@ import type { ChangeEvent, FormEvent } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 
 import { useMutation } from "@apollo/client";
-import { LOGIN_USER } from "..utils/mutations";
+import { LOGIN_USER } from "../utils/mutations.js";
 
-import Auth from "../utils/auth";
-import type { User } from "../models/User";
+import Auth from "../utils/auth.js";
+import type { User } from "../models/User.js";
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const LoginForm = ({}: { handleModalClose: () => void }) => {

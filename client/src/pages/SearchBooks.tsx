@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import type { FormEvent } from "react";
 import { Container, Col, Form, Button, Card, Row } from "react-bootstrap";
 
-import Auth from "../utils/auth";
-import { searchGoogleBooks } from "../utils/API";
-import { saveBookIds, getSavedBookIds } from "../utils/localStorage";
-import type { Book } from "../models/Book";
-import type { GoogleAPIBook } from "../models/GoogleAPIBook";
-import { useMutation } from "@apolo/client";
-import { ADD_BOOK } from "../utils/mutations";
+import Auth from "../utils/auth.js";
+import { searchGoogleBooks } from "../utils/API.js";
+import { saveBookIds, getSavedBookIds } from "../utils/localStorage.js";
+import type { Book } from "../models/Book.js";
+import type { GoogleAPIBook } from "../models/GoogleAPIBook.js";
+import { useMutation } from "@apollo/client";
+import { SAVE_BOOK } from "../utils/mutations.js";
 
 const SearchBooks = () => {
   // create state for holding returned google api data
@@ -24,7 +24,7 @@ const SearchBooks = () => {
   useEffect(() => {
     return () => saveBookIds(savedBookIds);
   });
-  const [addBook, {}] = useMutation(ADD_BOOK);
+  const [saveBook, {}] = useMutation(SAVE_BOOK);
 
   // create method to search for books and set state on form submit
   const handleFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -73,7 +73,7 @@ const SearchBooks = () => {
     }
 
     try {
-      await addBook({
+      await saveBook({
         variables: { book: bookToSave },
       });
 
