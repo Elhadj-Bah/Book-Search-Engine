@@ -15,6 +15,7 @@ const typeDefs = `
     image: String
     link: String
   }
+    
   input BookInput {
     bookId: String!
     authors: [String]

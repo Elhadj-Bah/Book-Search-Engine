@@ -3,11 +3,12 @@ import jwt from "jsonwebtoken";
 
 import dotenv from "dotenv";
 dotenv.config();
+console.log("ENV: ", process.env.JWT_SECRET_KEY);
 
 export const authenticateToken = ({ req }: any) => {
   // alow token to b sent via req.body, req.query or headers
   let token = req.body.token || req.query.token || req.headers.authorization;
-
+  console.log("Server token: ", token);
   // if token was sent via headers, we need to extract it
   if (req.headers.authorization) {
     token = token.split(" ").pop().trim();
@@ -37,7 +38,7 @@ export const signToken = (username: string, email: string, _id: unknown) => {
   const payload = { username, email, _id };
   const secretKey: any = process.env.JWT_SECRET_KEY || "";
 
-  return jwt.sign(payload, secretKey, { expiresIn: "2h" });
+  return jwt.sign({ data: payload }, secretKey, { expiresIn: "2h" });
 };
 
 export class AuthenticationError extends GraphQLError {

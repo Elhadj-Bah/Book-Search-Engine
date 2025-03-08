@@ -12,11 +12,12 @@ const resolvers = {
   },
   Mutation: {
     addUser: async (_parent: any, { username, email, password }: any) => {
+      console.log("incoming data: ", username, email, password);
       // create a new user with the provided username, email, and password
       const user = await User.create({ username, email, password });
-
+      console.log("User created: ", user);
       const token = signToken(user.username, user.email, user._id);
-
+      console.log("Token created: ", token);
       return { token, user };
     },
 
@@ -49,14 +50,16 @@ const resolvers = {
     // methodName : (parentArgument, args(incoming data arguments), context) => {functionality}
     saveBook: async (_parent: any, { input }: any, context: any) => {
       console.log("incoming data: ", input);
-      console.log("context data: ", context);
+      console.log("context data: ", context.user);
 
       if (context.user) {
-        return User.findOneAndUpdate(
-          context.user._id,
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id },
           { $addToSet: { savedBooks: input } },
-          { new: true, runValidators: true }
+          { new: true }
         ).populate("savedBooks");
+        console.log("User updated: ", user);
+        return user;
       }
       throw new AuthenticationError("You need to be logged in!");
     },

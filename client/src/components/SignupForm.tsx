@@ -2,20 +2,19 @@ import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { Form, Button, Alert } from "react-bootstrap";
 
-import { createUser } from "../utils/API.js";
+//import { createUser } from "../utils/API.js";
 import Auth from "../utils/auth.js";
-import type { User } from "../models/User.js";
+//import type { User } from "../models/User.js";
 import { useMutation } from "@apollo/client";
 import { ADD_USER } from "../utils/mutations.js";
 
 // biome-ignore lint/correctness/noEmptyPattern: <explanation>
 const SignupForm = ({}: { handleModalClose: () => void }) => {
   // set initial form state
-  const [userFormData, setUserFormData] = useState<User>({
+  const [userFormData, setUserFormData] = useState({
     username: "",
     email: "",
     password: "",
-    savedBooks: [],
   });
   // set state for form validation
   const [validated] = useState(false);
@@ -42,10 +41,11 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
 
     try {
       const { data } = await addUser({
-        variables: { input: { ...FormData } },
+        variables: { ...userFormData },
       });
-
-      const { token } = data?.addUser.token;
+      console.log("data: ", data);
+      const { token } = data?.addUser;
+      console.log("token: ", token);
       Auth.login(token);
     } catch (err) {
       console.error(err);
@@ -56,7 +56,6 @@ const SignupForm = ({}: { handleModalClose: () => void }) => {
       username: "",
       email: "",
       password: "",
-      savedBooks: [],
     });
   };
 
