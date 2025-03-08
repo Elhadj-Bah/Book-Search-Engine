@@ -1,11 +1,12 @@
 import { GraphQLError } from "graphql";
 import jwt from "jsonwebtoken";
+import { type Request } from "express";
 
 import dotenv from "dotenv";
 dotenv.config();
-console.log("ENV: ", process.env.JWT_SECRET_KEY);
+//console.log("ENV: ", process.env.JWT_SECRET_KEY);
 
-export const authenticateToken = ({ req }: any) => {
+export const authenticateToken = ({ req }: { req: Request }) => {
   // alow token to b sent via req.body, req.query or headers
   let token = req.body.token || req.query.token || req.headers.authorization;
   console.log("Server token: ", token);
