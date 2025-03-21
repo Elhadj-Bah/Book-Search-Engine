@@ -1,7 +1,7 @@
 import express from "express";
 import { Request, Response } from "express";
 import path from "node:path";
-const __dirname = import.meta.dirname;
+//const __dirname = import.meta.dirname;
 //import { dirname } from "node:path";
 //import { fileURLToPath } from "node:url";
 //const __dirname = dirname(fileURLToPath(import.meta.url));
