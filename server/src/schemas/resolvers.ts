@@ -67,7 +67,7 @@ const resolvers = {
     removeBook: async (_parent: any, { bookId }: any, context: any) => {
       if (context.user) {
         return User.findOneAndUpdate(
-          context.user._id,
+          { _id: context.user._id },
           { $pull: { savedBooks: { bookId } } },
           { new: true }
         ).populate("savedBooks");
