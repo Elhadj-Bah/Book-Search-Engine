@@ -1,6 +1,11 @@
 import express from "express";
 import { Request, Response } from "express";
 import path from "node:path";
+const __dirname = import.meta.dirname;
+//import { dirname } from "node:path";
+//import { fileURLToPath } from "node:url";
+//const __dirname = dirname(fileURLToPath(import.meta.url));
+
 import db from "./config/connection.js";
 //import routes from "./routes/index.js";
 import { typeDefs, resolvers } from "./schemas/index.js";
